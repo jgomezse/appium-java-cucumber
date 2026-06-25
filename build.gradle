@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '4.0.2'
+}
+
+group = 'com.appium'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    test {
+        resources {
+            srcDir 'src/test/java'
+            exclude '**/*.java'
+        }
+    }
+}
+
+dependencies {
+    // Source: https://mvnrepository.com/artifact/org.junit/junit-bom
+    testImplementation platform(group: 'org.junit', name: 'junit-bom', version: '5.11.3')
+
+    // Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter'
+
+    // Source: https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-suite'
+
+    // Source: https://mvnrepository.com/artifact/io.appium/java-client
+    testImplementation group: 'io.appium', name: 'java-client', version: '9.4.0'
+
+    // Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: '7.20.0'
+
+    // Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit-platform-engine', version: '7.20.0'
+
+    // Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber7-jvm
+    testImplementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.35.2'
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.24.3'
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.24.3'
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: '2.24.3'
+}
+
+allure {
+    version = '2.43.0'
+    autoconfigure = true
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
