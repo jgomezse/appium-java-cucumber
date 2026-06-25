@@ -1,10 +1,12 @@
 package com.appium.pages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,12 +33,17 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    protected WebElement waitForElementClickable(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     public void click(By locator) {
-        waitForElement(locator).click();
+        waitForElementClickable(locator).click();
         log.debug("Click en: {}", locator);
     }
 
-    public void type(By locator, String text) {
+    public void write(By locator, String text) {
         WebElement element = waitForElement(locator);
         element.clear();
         element.sendKeys(text);
@@ -47,15 +54,33 @@ public class BasePage {
         return waitForElement(locator).getText();
     }
 
+    public String getAttribute(By locator, String attribute) {
+        return waitForElement(locator).getAttribute(attribute);
+    }
+
     public boolean isDisplayed(By locator) {
         try {
             return waitForElement(locator).isDisplayed();
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
     }
 
     public byte[] takeScreenshot() {
         return driver.getScreenshotAs(OutputType.BYTES);
+    }
+
+    public void scrollToText(String text) {
+        driver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"" + text + "\"))"
+        ));
+        log.debug("Scroll hasta texto: {}", text);
+    }
+
+    public void scrollToContentDesc(String desc) {
+        driver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description(\"" + desc + "\"))"
+        ));
+        log.debug("Scroll hasta content-desc: {}", desc);
     }
 }
