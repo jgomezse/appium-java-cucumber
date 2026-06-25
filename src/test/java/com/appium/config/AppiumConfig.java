@@ -22,9 +22,9 @@ public class AppiumConfig {
                     new URL("http://127.0.0.1:4723"),
                     CapabilitiesConfig.getCapabilities()
             );
-            log.info("AndroidDriver initialized");
+            log.info("AndroidDriver inicializado");
         } catch (MalformedURLException e) {
-            log.error("Invalid Appium server URL", e);
+            log.error("URL del servidor Appium inválida", e);
             throw new RuntimeException(e);
         }
     }
@@ -40,9 +40,9 @@ public class AppiumConfig {
         if (driver != null) {
             try {
                 driver.quit();
-                log.info("AndroidDriver quit");
+                log.info("AndroidDriver finalizado");
             } catch (Exception e) {
-                log.error("Error quitting driver", e);
+                log.error("Error al finalizar el driver", e);
             } finally {
                 driver = null;
             }
