@@ -26,14 +26,23 @@ Cada propiedad puede sobrescribirse individualmente por línea de comandos:
 ```bash
 appium                              # Iniciar Appium server
 emulator -avd mobile_emulator       # Iniciar emulador
-./gradlew clean test
+./gradlew clean test                # Smoke tests (@smoke)
 ```
 
-## Reporte Cucumber HTML
+### Ejecución por tags
+
+```bash
+./gradlew clean test -Dcucumber.filter.tags="@login"       # Solo login
+./gradlew clean test -Dcucumber.filter.tags="@compra"       # Solo compra
+./gradlew clean test -Dcucumber.filter.tags="@exploracion"  # Exploración de localizadores
+```
+
+## Reportes
 
 ```bash
 ./gradlew clean test
-# → build/reports/cucumber/cucumber.html
+# Cucumber HTML → build/reports/cucumber/cucumber.html
+# Allure        → allure serve build/allure-results
 ```
 
 ## CI (GitHub Actions)
