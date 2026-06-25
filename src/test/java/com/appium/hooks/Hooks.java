@@ -27,18 +27,18 @@ public class Hooks {
 
     @After
     public void tearDown(Scenario scenario) {
+        try {
+            byte[] screenshot = new BasePage(AppiumConfig.getDriver()).takeScreenshot();
+            Allure.addAttachment(
+                    "Screenshot_" + scenario.getName(),
+                    "image/png",
+                    new ByteArrayInputStream(screenshot),
+                    "png");
+            log.info("Screenshot adjuntado: {}", scenario.getName());
+        } catch (Exception e) {
+            log.error("Error al capturar screenshot", e);
+        }
         if (scenario.isFailed()) {
-            try {
-                byte[] screenshot = new BasePage(AppiumConfig.getDriver()).takeScreenshot();
-                Allure.addAttachment(
-                        "Screenshot_" + scenario.getName(),
-                        "image/png",
-                        new ByteArrayInputStream(screenshot),
-                        "png");
-                log.info("Screenshot adjuntado para escenario fallido: {}", scenario.getName());
-            } catch (Exception e) {
-                log.error("Error al capturar screenshot", e);
-            }
             try {
                 String source = AppiumConfig.getDriver().getPageSource();
                 Path path = Paths.get("build", "page-source", scenario.getName().replaceAll("\\s+", "_") + ".xml");
