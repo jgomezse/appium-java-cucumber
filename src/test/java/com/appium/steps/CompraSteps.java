@@ -38,6 +38,7 @@ public class CompraSteps {
 
     @When("procedo al checkout")
     public void checkout() {
+        cart.scrollToContentDesc("test-CHECKOUT");
         cart.click(cart.getCheckoutButton());
         log.info("Procediendo al checkout");
     }
