@@ -29,6 +29,7 @@ public class Hooks {
     public void tearDown(Scenario scenario) {
         try {
             byte[] screenshot = new BasePage(AppiumConfig.getDriver()).takeScreenshot();
+            scenario.attach(screenshot, "image/png", "Screenshot_" + scenario.getName());
             Allure.addAttachment(
                     "Screenshot_" + scenario.getName(),
                     "image/png",
