@@ -16,16 +16,16 @@ public class EjemploSteps {
 
     @Given("la app esta abierta")
     public void laAppEstaAbierta() {
-        log.info("App is open");
+        log.info("La app está abierta");
     }
 
     @When("realizo una accion")
     public void realizoUnaAccion() {
-        log.info("Performing an action");
+        log.info("Realizando acción");
     }
 
     @Then("veo el resultado esperado")
     public void veoElResultadoEsperado() {
-        log.info("Verifying result");
+        log.info("Verificando resultado");
     }
 }

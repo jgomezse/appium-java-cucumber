@@ -22,12 +22,12 @@ public class CapabilitiesConfig {
                 .getResourceAsStream(filename)) {
             if (is != null) {
                 props.load(is);
-                log.info("Loaded {}", filename);
+                log.info("{} cargado", filename);
             } else {
-                log.warn("{} not found on classpath, using empty config", filename);
+                log.warn("{} no encontrado en classpath, usando config vacía", filename);
             }
         } catch (IOException e) {
-            log.error("Failed to load {}", filename, e);
+            log.error("Error al cargar {}", filename, e);
         }
     }
 
@@ -49,7 +49,7 @@ public class CapabilitiesConfig {
                 fullPath = Paths.get(System.getProperty("user.dir")).resolve(appPath);
             }
             caps.setCapability("appium:app", fullPath.toAbsolutePath().toString());
-            log.info("App path: {}", fullPath.toAbsolutePath());
+            log.info("Ruta de la app: {}", fullPath.toAbsolutePath());
         }
 
         String noReset = get("appium.noReset");

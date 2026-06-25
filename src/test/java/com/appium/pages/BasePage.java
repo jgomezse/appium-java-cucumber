@@ -33,14 +33,14 @@ public class BasePage {
 
     public void click(By locator) {
         waitForElement(locator).click();
-        log.debug("Clicked: {}", locator);
+        log.debug("Click en: {}", locator);
     }
 
     public void type(By locator, String text) {
         WebElement element = waitForElement(locator);
         element.clear();
         element.sendKeys(text);
-        log.debug("Typed '{}' into: {}", text, locator);
+        log.debug("Texto '{}' escrito en: {}", text, locator);
     }
 
     public String getText(By locator) {

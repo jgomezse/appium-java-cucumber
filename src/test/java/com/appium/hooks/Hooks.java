@@ -17,7 +17,7 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        log.info("Starting scenario");
+        log.info("Iniciando escenario");
         AppiumConfig.initDriver();
     }
 
@@ -32,12 +32,12 @@ public class Hooks {
                         new ByteArrayInputStream(screenshot),
                         "png"
                 );
-                log.info("Screenshot attached for failed scenario: {}", scenario.getName());
+                log.info("Screenshot adjuntado para escenario fallido: {}", scenario.getName());
             } catch (Exception e) {
-                log.error("Failed to capture screenshot", e);
+                log.error("Error al capturar screenshot", e);
             }
         }
         AppiumConfig.quitDriver();
-        log.info("Scenario finished: {}", scenario.getName());
+        log.info("Escenario finalizado: {}", scenario.getName());
     }
 }
