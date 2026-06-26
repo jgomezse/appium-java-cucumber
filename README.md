@@ -41,8 +41,9 @@ emulator -avd mobile_emulator       # Iniciar emulador
 
 ```bash
 ./gradlew clean test
-# Cucumber HTML → build/reports/cucumber/cucumber.html
-# Allure        → allure serve build/allure-results
+# Cucumber HTML  → build/reports/cucumber/cucumber.html
+# Cucumber JSON  → build/reports/cucumber/cucumber.json
+# Allure         → allure serve build/allure-results
 ```
 
 ## CI (GitHub Actions)
@@ -51,7 +52,10 @@ El workflow en `.github/workflows/appium-tests.yml` se ejecuta:
 - Automáticamente al hacer push a `main`
 - Manualmente desde la pestaña **Actions** → `workflow_dispatch`
 
-Sube como artefacto `cucumber-report` (`cucumber.html`).
+Sube como artefactos:
+- `cucumber-report` (`cucumber.html`)
+- `cucumber-json-report` (`cucumber.json`)
+- `allure-report`
 
 ## Estructura
 
