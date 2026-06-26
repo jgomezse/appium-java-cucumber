@@ -53,8 +53,7 @@ El workflow en `.github/workflows/appium-tests.yml` se ejecuta:
 - Manualmente desde la pestaña **Actions** → `workflow_dispatch`
 
 Sube como artefactos:
-- `cucumber-report` (`cucumber.html`)
-- `cucumber-json-report` (`cucumber.json`)
+- `cucumber-report` (`cucumber.html` + `cucumber.json`)
 - `allure-report`
 
 ## Estructura
